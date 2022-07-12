@@ -6,7 +6,7 @@ import java.lang.annotation.Retention;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.algaworks.algafoodapi.enumerador.NivelUrgencia;
+import com.algaworks.algafoodapi.notificacao.enumerador.NivelUrgencia;
 
 @Retention(RUNTIME)
 @Qualifier

@@ -6,12 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import com.algaworks.algafoodapi.di.notificacao.Notificador;
 import com.algaworks.algafoodapi.di.service.AtivacaoClienteService;
 
-@Configuration
+//@Configuration
 public class ServiceConfig {
 
-	@Bean
-    AtivacaoClienteService ativacaoClienteService(Notificador notificador) {
-        return new AtivacaoClienteService(notificador);
-    }
+//	@Bean
+//    AtivacaoClienteService ativacaoClienteService(Notificador notificador) {
+//        return new AtivacaoClienteService(notificador);
+//    }
 	
 }

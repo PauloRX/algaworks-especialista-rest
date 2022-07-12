@@ -7,20 +7,20 @@ import com.algaworks.algafoodapi.anotacao.TipoNotificador;
 import com.algaworks.algafoodapi.di.modelo.Cliente;
 import com.algaworks.algafoodapi.notificacao.enumerador.NivelUrgencia;
 
-@Profile("prod")
+@Profile("dev")
 @TipoNotificador(NivelUrgencia.NORMAL)
 @Component
-public class NotificadorEmail implements Notificador {
+public class NotificadorEmailMock implements Notificador {
 
 	private final String servidorSMTP = "smtp.algamail.com.br";
 	
-	public NotificadorEmail() {
+	public NotificadorEmailMock() {
 		System.out.println("Construtor NotificadorEmail chamado");
 	}
 
 	@Override
 	public void notificar(Cliente cliente, String mensagem) {
-		System.out.printf("Notificando %s atraves do e-mail %s - servidor %s: %s \n", 
+		System.out.printf("MOCK: Notificacao seria enviada para %s atraves do e-mail %s - servidor %s: %s \n", 
 				cliente.getNome(), 
 				cliente.getEmail(),
 				this.servidorSMTP,

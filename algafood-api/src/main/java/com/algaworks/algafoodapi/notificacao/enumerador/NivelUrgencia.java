@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.enumerador;
+package com.algaworks.algafoodapi.notificacao.enumerador;
 
 public enum NivelUrgencia {
 
