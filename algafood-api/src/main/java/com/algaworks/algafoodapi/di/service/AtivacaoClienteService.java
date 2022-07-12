@@ -1,5 +1,7 @@
 package com.algaworks.algafoodapi.di.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.algaworks.algafoodapi.di.modelo.Cliente;
@@ -8,16 +10,17 @@ import com.algaworks.algafoodapi.di.notificacao.Notificador;
 public class AtivacaoClienteService {
 	
 	@Autowired
-	private Notificador notificador;
+	private List<Notificador> notificadores;
 	
-	public AtivacaoClienteService(Notificador notificador) {
-		this.notificador = notificador;
-		System.out.println("Construtor AtivacaoClienteService: " + notificador);
+	public AtivacaoClienteService(List<Notificador> notificadores) {
+		this.notificadores = notificadores;
 	}
 
 	public void ativar(Cliente cliente) {
 		cliente.ativar();
-		notificador.notificar(cliente, "Seu cadastro no sistema esta ativo!");
+		for (Notificador notificador : notificadores) {
+			notificador.notificar(cliente, "Seu cadastro no sistema esta ativo!");			
+		}
 	}
 
 }
