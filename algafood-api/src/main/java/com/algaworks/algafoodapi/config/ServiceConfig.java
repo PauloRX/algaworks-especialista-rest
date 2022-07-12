@@ -9,7 +9,7 @@ import com.algaworks.algafoodapi.di.service.AtivacaoClienteService;
 @Configuration
 public class ServiceConfig {
 
-    @Bean
+	@Bean
     AtivacaoClienteService ativacaoClienteService(Notificador notificador) {
         return new AtivacaoClienteService(notificador);
     }
