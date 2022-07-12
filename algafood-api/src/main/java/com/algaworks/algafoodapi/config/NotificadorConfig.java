@@ -2,6 +2,7 @@ package com.algaworks.algafoodapi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import com.algaworks.algafoodapi.di.notificacao.NotificadorEmail;
 import com.algaworks.algafoodapi.di.notificacao.NotificadorSMS;
@@ -9,6 +10,7 @@ import com.algaworks.algafoodapi.di.notificacao.NotificadorSMS;
 @Configuration
 public class NotificadorConfig {
 
+	@Primary
 	@Bean
     NotificadorEmail notificadorEmail() {
         NotificadorEmail notificador = new NotificadorEmail("smtp.algamail.com.br");
