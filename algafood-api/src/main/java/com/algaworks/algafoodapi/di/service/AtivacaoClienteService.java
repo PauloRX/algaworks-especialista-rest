@@ -1,5 +1,8 @@
 package com.algaworks.algafoodapi.di.service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,4 +27,10 @@ public class AtivacaoClienteService {
 		notificador.notificar(cliente, "Seu cadastro no sistema esta ativo!");
 	}
 
+	@PostConstruct
+	public void init() { System.out.println("INIT"); }
+	
+	@PreDestroy
+	public void destroy() { System.out.println("DESTROY"); }
+	
 }
