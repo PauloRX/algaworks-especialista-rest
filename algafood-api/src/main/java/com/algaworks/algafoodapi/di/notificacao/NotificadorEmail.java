@@ -1,5 +1,6 @@
 package com.algaworks.algafoodapi.di.notificacao;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,11 @@ import com.algaworks.algafoodapi.notificacao.enumerador.NivelUrgencia;
 @Component
 public class NotificadorEmail implements Notificador {
 
-	private final String servidorSMTP = "smtp.algamail.com.br";
+	@Value("${notificador.email.host.server}")
+	private String servidorSMTP;
+	
+	@Value("${notificador.email.port.server}")
+	private String servidorPort;
 	
 	public NotificadorEmail() {
 		System.out.println("Construtor NotificadorEmail chamado");
@@ -20,10 +25,11 @@ public class NotificadorEmail implements Notificador {
 
 	@Override
 	public void notificar(Cliente cliente, String mensagem) {
-		System.out.printf("Notificando %s atraves do e-mail %s - servidor %s: %s \n", 
+		System.out.printf("Notificando %s atraves do e-mail %s - servidor %s - porta %s: %s \n", 
 				cliente.getNome(), 
 				cliente.getEmail(),
 				this.servidorSMTP,
+				this.servidorPort,
 				mensagem);
 	}
 
