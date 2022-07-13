@@ -1,6 +1,6 @@
 package com.algaworks.algafoodapi.di.notificacao;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -13,19 +13,16 @@ import com.algaworks.algafoodapi.notificacao.enumerador.NivelUrgencia;
 @Component
 public class NotificadorEmailMock implements Notificador {
 
-	@Value("${notificador.email.host.server}")
-	private String servidorSMTP;
-	
-	@Value("${notificador.email.port.server}")
-	private Integer servidorPort;
+	@Autowired
+	private NotificadorProperties properties;
 	
 	@Override
 	public void notificar(Cliente cliente, String mensagem) {
 		System.out.printf("MOCK: Notificacao seria enviada para %s atraves do e-mail %s - servidor %s - porta %d: %s \n", 
 				cliente.getNome(), 
 				cliente.getEmail(),
-				this.servidorSMTP,
-				this.servidorPort,
+				properties.getHostServer(),
+				properties.getPortServer(),
 				mensagem);
 	}
 
