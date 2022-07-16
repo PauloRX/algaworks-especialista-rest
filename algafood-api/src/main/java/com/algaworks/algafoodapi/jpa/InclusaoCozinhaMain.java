@@ -20,7 +20,7 @@ public class InclusaoCozinhaMain {
 		cozinha.setId(1L);
 		cozinha.setNome("Brasileira");
 		
-		cadastroCozinha.adicionar(cozinha);
+		cadastroCozinha.salvar(cozinha);
 		
 
 	}
