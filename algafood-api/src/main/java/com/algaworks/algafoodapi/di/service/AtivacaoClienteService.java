@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.algaworks.algafoodapi.anotacao.TipoNotificador;
 import com.algaworks.algafoodapi.di.eventos.ClienteAtivadoEvent;
-import com.algaworks.algafoodapi.di.modelo.Cliente;
+import com.algaworks.algafoodapi.di.model.Cliente;
 import com.algaworks.algafoodapi.di.notificacao.Notificador;
 import com.algaworks.algafoodapi.notificacao.enumerador.NivelUrgencia;
 
