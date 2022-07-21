@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.jpa;
+package com.algaworks.algafoodapi.jpa.restaurante;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -8,7 +8,7 @@ import com.algaworks.algafoodapi.AlgafoodApiApplication;
 import com.algaworks.algafoodapi.domain.model.Restaurante;
 import com.algaworks.algafoodapi.infrastructure.repository.RestauranteRepositoryImpl;
 
-public class ExclusaoRestauranteMain {
+public class InclusaoRestauranteMain {
 
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = new SpringApplicationBuilder(AlgafoodApiApplication.class)
@@ -19,8 +19,10 @@ public class ExclusaoRestauranteMain {
 		
 		Restaurante restaurante = new Restaurante();
 		restaurante.setId(1L);
+		restaurante.setNome("Jesus me Chama");
 		
-		restaurantes.remover(restaurante);
+		restaurantes.adicionar(restaurante);
+		
 
 	}
 

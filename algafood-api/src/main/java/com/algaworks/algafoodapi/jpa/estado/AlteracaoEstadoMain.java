@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.jpa;
+package com.algaworks.algafoodapi.jpa.estado;
 
 import java.util.List;
 
@@ -7,21 +7,23 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
 import com.algaworks.algafoodapi.AlgafoodApiApplication;
-import com.algaworks.algafoodapi.domain.model.Restaurante;
-import com.algaworks.algafoodapi.infrastructure.repository.RestauranteRepositoryImpl;
+import com.algaworks.algafoodapi.domain.model.Estado;
+import com.algaworks.algafoodapi.infrastructure.repository.EstadoRepositoryImpl;
 
-public class CadastroRestauranteMain {
+public class AlteracaoEstadoMain {
 
 	public static void main(String[] args) {
+
 		ApplicationContext applicationContext = new SpringApplicationBuilder(AlgafoodApiApplication.class)
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		RestauranteRepositoryImpl restauntes = applicationContext.getBean(RestauranteRepositoryImpl.class);
+		EstadoRepositoryImpl estados = applicationContext.getBean(EstadoRepositoryImpl.class);
 		
-		List<Restaurante> todasCozinhas = restauntes.todos();
-		todasCozinhas.forEach(r -> System.out.println(r.getNome()));
-
+		List<Estado> todosEstados = estados.todos();
+		
+		todosEstados.forEach(e -> System.out.println(e.getNome()));
+		
 	}
 
 }

@@ -1,6 +1,6 @@
-package com.algaworks.algafoodapi.jpa;
+package com.algaworks.algafoodapi.jpa.restaurante;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -10,7 +10,7 @@ import com.algaworks.algafoodapi.AlgafoodApiApplication;
 import com.algaworks.algafoodapi.domain.model.Restaurante;
 import com.algaworks.algafoodapi.infrastructure.repository.RestauranteRepositoryImpl;
 
-public class AlteracaoRestauranteMain {
+public class BuscaRestauranteMain {
 
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = new SpringApplicationBuilder(AlgafoodApiApplication.class)
@@ -19,17 +19,9 @@ public class AlteracaoRestauranteMain {
 		
 		RestauranteRepositoryImpl restaurantes = applicationContext.getBean(RestauranteRepositoryImpl.class);
 		
-		Restaurante restaurante1 = new Restaurante();
-		restaurante1.setNome("Bond Bico");
-		restaurante1.setTaxaFrete(new BigDecimal("10.0"));
+		List<Restaurante> todosRestaurantes = restaurantes.todos();
 		
-		Restaurante restaurante2 = new Restaurante();
-		restaurante2.setNome("Rubaiyat Figueira");
-		restaurante2.setTaxaFrete(new BigDecimal("15.0"));
-		
-		restaurantes.adicionar(restaurante1);
-		restaurantes.adicionar(restaurante2);
-		
+		todosRestaurantes.forEach(r -> System.out.printf("%s - %2f - %s\n", r.getNome(), r.getTaxaFrete(), r.getCozinha().getNome()));
 
 	}
 

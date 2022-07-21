@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.jpa;
+package com.algaworks.algafoodapi.jpa.restaurante;
 
 import java.util.List;
 
@@ -10,18 +10,17 @@ import com.algaworks.algafoodapi.AlgafoodApiApplication;
 import com.algaworks.algafoodapi.domain.model.Restaurante;
 import com.algaworks.algafoodapi.infrastructure.repository.RestauranteRepositoryImpl;
 
-public class BuscaRestauranteMain {
+public class CadastroRestauranteMain {
 
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = new SpringApplicationBuilder(AlgafoodApiApplication.class)
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		RestauranteRepositoryImpl restaurantes = applicationContext.getBean(RestauranteRepositoryImpl.class);
+		RestauranteRepositoryImpl restauntes = applicationContext.getBean(RestauranteRepositoryImpl.class);
 		
-		List<Restaurante> todosRestaurantes = restaurantes.todos();
-		
-		todosRestaurantes.forEach(r -> System.out.printf("%s - %2f - %s\n", r.getNome(), r.getTaxaFrete(), r.getCozinha().getNome()));
+		List<Restaurante> todasCozinhas = restauntes.todos();
+		todasCozinhas.forEach(r -> System.out.println(r.getNome()));
 
 	}
 
