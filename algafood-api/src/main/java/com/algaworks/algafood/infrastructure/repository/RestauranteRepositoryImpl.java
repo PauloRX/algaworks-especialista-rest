@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.infrastructure.repository;
+package com.algaworks.algafood.infrastructure.repository;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.algaworks.algafoodapi.domain.model.Restaurante;
-import com.algaworks.algafoodapi.domain.repository.RestauranteRepository;
+import com.algaworks.algafood.domain.model.Restaurante;
+import com.algaworks.algafood.domain.repository.RestauranteRepository;
 
 @Component
 public class RestauranteRepositoryImpl implements RestauranteRepository {

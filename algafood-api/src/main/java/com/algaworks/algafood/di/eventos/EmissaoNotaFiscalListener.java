@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.di.eventos;
+package com.algaworks.algafood.di.eventos;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;

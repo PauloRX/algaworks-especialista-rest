@@ -1,8 +1,8 @@
-package com.algaworks.algafoodapi.domain.repository;
+package com.algaworks.algafood.domain.repository;
 
 import java.util.List;
 
-import com.algaworks.algafoodapi.domain.model.Cidade;
+import com.algaworks.algafood.domain.model.Cidade;
 
 public interface CidadeRepository {
 

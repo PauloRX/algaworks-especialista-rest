@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.di.notificacao;
+package com.algaworks.algafood.di.notificacao;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

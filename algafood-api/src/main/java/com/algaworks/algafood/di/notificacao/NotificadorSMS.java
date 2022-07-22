@@ -1,6 +1,6 @@
-package com.algaworks.algafoodapi.di.notificacao;
+package com.algaworks.algafood.di.notificacao;
 
-import com.algaworks.algafoodapi.di.model.Cliente;
+import com.algaworks.algafood.di.model.Cliente;
 
 public class NotificadorSMS implements Notificador {
 

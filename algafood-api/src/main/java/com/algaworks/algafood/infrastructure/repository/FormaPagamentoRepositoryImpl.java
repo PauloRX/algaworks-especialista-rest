@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.infrastructure.repository;
+package com.algaworks.algafood.infrastructure.repository;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.algaworks.algafoodapi.domain.model.FormaPagamento;
-import com.algaworks.algafoodapi.domain.repository.FormaPagamentoRepository;
+import com.algaworks.algafood.domain.model.FormaPagamento;
+import com.algaworks.algafood.domain.repository.FormaPagamentoRepository;
 
 @Component
 public class FormaPagamentoRepositoryImpl implements FormaPagamentoRepository {

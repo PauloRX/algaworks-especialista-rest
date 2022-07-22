@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.api;
+package com.algaworks.algafood.api;
 
 import java.util.List;
 
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.algaworks.algafoodapi.domain.model.Cozinha;
-import com.algaworks.algafoodapi.domain.repository.CozinhaRepository;
-import com.algaworks.algafoodapi.model.CozinhaXmlWrapper;
+import com.algaworks.algafood.domain.model.Cozinha;
+import com.algaworks.algafood.domain.repository.CozinhaRepository;
+import com.algaworks.algafood.model.CozinhaXmlWrapper;
 
 @RestController
 @RequestMapping("/cozinhas")

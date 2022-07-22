@@ -1,12 +1,12 @@
-package com.algaworks.algafoodapi.di.notificacao;
+package com.algaworks.algafood.di.notificacao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import com.algaworks.algafoodapi.anotacao.TipoNotificador;
-import com.algaworks.algafoodapi.di.model.Cliente;
-import com.algaworks.algafoodapi.notificacao.enumerador.NivelUrgencia;
+import com.algaworks.algafood.anotacao.TipoNotificador;
+import com.algaworks.algafood.di.model.Cliente;
+import com.algaworks.algafood.notificacao.enumerador.NivelUrgencia;
 
 @Profile("prod")
 @TipoNotificador(NivelUrgencia.NORMAL)

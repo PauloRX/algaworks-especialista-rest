@@ -1,13 +1,13 @@
-package com.algaworks.algafoodapi.config;
+package com.algaworks.algafood.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
-import com.algaworks.algafoodapi.di.notificacao.NotificadorEmail;
-import com.algaworks.algafoodapi.di.notificacao.NotificadorEmailMock;
-import com.algaworks.algafoodapi.di.notificacao.NotificadorSMS;
+import com.algaworks.algafood.di.notificacao.NotificadorEmail;
+import com.algaworks.algafood.di.notificacao.NotificadorEmailMock;
+import com.algaworks.algafood.di.notificacao.NotificadorSMS;
 
 //@Configuration
 public class NotificadorConfig {

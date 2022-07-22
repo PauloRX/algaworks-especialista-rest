@@ -1,10 +1,10 @@
-package com.algaworks.algafoodapi.config;
+package com.algaworks.algafood.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.algaworks.algafoodapi.di.notificacao.Notificador;
-import com.algaworks.algafoodapi.di.service.AtivacaoClienteService;
+import com.algaworks.algafood.di.notificacao.Notificador;
+import com.algaworks.algafood.di.service.AtivacaoClienteService;
 
 //@Configuration
 public class ServiceConfig {

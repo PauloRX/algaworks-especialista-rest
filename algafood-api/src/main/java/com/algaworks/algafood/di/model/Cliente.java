@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.di.model;
+package com.algaworks.algafood.di.model;
 
 public class Cliente {
 

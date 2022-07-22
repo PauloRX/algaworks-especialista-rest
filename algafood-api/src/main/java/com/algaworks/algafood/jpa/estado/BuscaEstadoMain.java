@@ -1,12 +1,12 @@
-package com.algaworks.algafoodapi.jpa.estado;
+package com.algaworks.algafood.jpa.estado;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
-import com.algaworks.algafoodapi.AlgafoodApiApplication;
-import com.algaworks.algafoodapi.domain.model.Estado;
-import com.algaworks.algafoodapi.infrastructure.repository.EstadoRepositoryImpl;
+import com.algaworks.algafood.AlgafoodApiApplication;
+import com.algaworks.algafood.domain.model.Estado;
+import com.algaworks.algafood.infrastructure.repository.EstadoRepositoryImpl;
 
 public class BuscaEstadoMain {
 

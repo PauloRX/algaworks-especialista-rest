@@ -1,4 +1,4 @@
-package com.algaworks.algafoodapi.jpa.cozinha;
+package com.algaworks.algafood.jpa.cozinha;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
-import com.algaworks.algafoodapi.AlgafoodApiApplication;
-import com.algaworks.algafoodapi.domain.model.Cozinha;
-import com.algaworks.algafoodapi.infrastructure.repository.CozinhaRepositoryImpl;
+import com.algaworks.algafood.AlgafoodApiApplication;
+import com.algaworks.algafood.domain.model.Cozinha;
+import com.algaworks.algafood.infrastructure.repository.CozinhaRepositoryImpl;
 
 public class CadastroCozinhaMain {
 
