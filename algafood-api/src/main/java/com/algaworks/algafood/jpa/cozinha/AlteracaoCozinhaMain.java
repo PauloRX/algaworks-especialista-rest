@@ -23,8 +23,8 @@ public class AlteracaoCozinhaMain {
 		Cozinha japa = new Cozinha();
 		japa.setNome("Japonesa");
 		
-		cozinhas.adicionar(brasa);
-		cozinhas.adicionar(japa);
+		cozinhas.salvar(brasa);
+		cozinhas.salvar(japa);
 		
 
 	}
