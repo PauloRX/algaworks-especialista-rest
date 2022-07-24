@@ -29,14 +29,13 @@ public class EstadoRepositoryImpl implements EstadoRepository {
 	
 	@Override
 	@Transactional
-	public Estado adicionar(Estado estado) {
+	public Estado salvar(Estado estado) {
 		return entityManager.merge(estado);
 	}
 	
 	@Override
 	@Transactional
-	public void remover(Estado estado) {
-		estado = buscarPorId(estado.getId());
-		entityManager.remove(estado);
+	public void remover(Long estadoId) {
+		entityManager.remove(estadoId);
 	}
 }
