@@ -21,7 +21,7 @@ public class InclusaoRestauranteMain {
 		restaurante.setId(1L);
 		restaurante.setNome("Jesus me Chama");
 		
-		restaurantes.adicionar(restaurante);
+		restaurantes.salvar(restaurante);
 		
 
 	}

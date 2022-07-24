@@ -27,8 +27,8 @@ public class AlteracaoRestauranteMain {
 		restaurante2.setNome("Rubaiyat Figueira");
 		restaurante2.setTaxaFrete(new BigDecimal("15.0"));
 		
-		restaurantes.adicionar(restaurante1);
-		restaurantes.adicionar(restaurante2);
+		restaurantes.salvar(restaurante1);
+		restaurantes.salvar(restaurante2);
 		
 
 	}
