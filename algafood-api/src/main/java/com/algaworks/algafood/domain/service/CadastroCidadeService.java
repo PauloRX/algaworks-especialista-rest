@@ -27,5 +27,13 @@ public class CadastroCidadeService {
 		cidade.setEstado(estado);
 		return cidadeRepository.salvar(cidade);
 	}
+
+	public void excluir(Long cidadeId) {
+		Cidade cidade = cidadeRepository.buscarPorId(cidadeId);
+		if (cidade == null) {
+			throw new EntidadeNaoEncontradaException(String.format("A Cidade codigo %d nao foi localizada", cidadeId));
+		}
+		
+	}
 	
 }
