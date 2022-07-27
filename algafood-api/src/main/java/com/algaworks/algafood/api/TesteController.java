@@ -36,6 +36,6 @@ public class TesteController {
 	
 	@GetMapping("/restaurantes/testeBuscarNome")
 	public Restaurante buscarPorNomeEId(String nome, Long id) {
-		return restauranteRepository.findByNomeContainingAndCozinhaId(nome, id);
+ 		return restauranteRepository.consultarPorNome(nome, id);
 	}
 }
