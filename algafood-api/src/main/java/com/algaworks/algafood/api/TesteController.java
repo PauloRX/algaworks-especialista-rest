@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.algaworks.algafood.domain.infrastructure.spec.RestauranteComFreteGratisSpec;
+import com.algaworks.algafood.domain.infrastructure.spec.RestauranteComNomeSemelhante;
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.domain.repository.CozinhaRepository;
@@ -43,4 +45,14 @@ public class TesteController {
 	public Restaurante buscarPorNomeEId(String nome, Long id) {
  		return restauranteRepository.consultarPorNome(nome, id);
 	}
+	
+	@GetMapping("/restaurantes/com-frete-gratis")
+	public List<Restaurante> restaurantesComFreteGratis(String nome) {
+ 		
+		var comFreteGratis = new RestauranteComFreteGratisSpec();
+		var comNomeSemelhante = new RestauranteComNomeSemelhante(nome);
+		
+		return restauranteRepository.findAll(comFreteGratis.and(comNomeSemelhante));
+	}
+	
 }
