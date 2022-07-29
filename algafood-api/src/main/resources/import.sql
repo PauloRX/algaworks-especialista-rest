@@ -2,9 +2,6 @@ insert into cozinha (nome) values ('Tailandesa');
 insert into cozinha (nome) values ('Indiana');
 insert into cozinha (nome) values ('Italiana');
 
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Fasano', 7.5, 3);
-insert into restaurante (nome, taxa_frete, cozinha_id) values ('Terraço Italia', 12.5, 3);
-
 insert into forma_pagamento (descricao) values ('Dinheiro');
 insert into forma_pagamento (descricao) values ('Cartao de Credito');
 insert into forma_pagamento (descricao) values ('Cartao de Debito');
@@ -20,7 +17,10 @@ insert into cidade (id, nome, estado_id) values (3, 'São Paulo', 2);
 insert into cidade (id, nome, estado_id) values (4, 'Campinas', 2);
 insert into cidade (id, nome, estado_id) values (5, 'Fortaleza', 3);
 
+insert into restaurante (nome, taxa_frete, cozinha_id, endereco_logradouro, endereco_numero, endereco_complemento, endereco_cep, endereco_bairro, endereco_cidade_id) values ('Fasano', 7.5, 3, 'Av Sete de Setembro', '2030', '', '02036022', 'Santana', 3);
+insert into restaurante (nome, taxa_frete, cozinha_id) values ('Terraço Italia', 12.5, 3);
+
 insert into permissao (id, nome, descricao) values (1, 'CONSULTAR_COZINHAS', 'Permite consultar cozinhas');
 insert into permissao (id, nome, descricao) values (2, 'EDITAR_COZINHAS', 'Permite editar cozinhas');
 
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (1,1), (1,2), (1,3), (1,4), (2,3), (2,4) 
+insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (1,1), (1,2), (1,3), (1,4), (2,3), (2,4)  
