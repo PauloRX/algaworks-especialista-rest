@@ -1,0 +1,1 @@
+ALTER TABLE cozinha CHANGE nome nome VARCHAR(60) NOT NULL;

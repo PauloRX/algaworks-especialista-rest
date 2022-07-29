@@ -6,12 +6,12 @@ DELETE FROM estado;
 DELETE FROM forma_pagamento;
 DELETE FROM grupo;
 DELETE FROM grupo_permissao;
-DELETE FROM permissao;
 DELETE FROM produto;
 DELETE FROM restaurante;
-DELETE FROM restaurante_forma_pagamento;
 DELETE FROM usuario;
 DELETE FROM usuario_grupo;
+
+
 
 insert into cozinha (nome) values ('Tailandesa');
 insert into cozinha (nome) values ('Indiana');
@@ -44,19 +44,7 @@ insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_a
 insert into permissao (id, nome, descricao) values (1, 'CONSULTAR_COZINHAS', 'Permite consultar cozinhas');
 insert into permissao (id, nome, descricao) values (2, 'EDITAR_COZINHAS', 'Permite editar cozinhas');
 
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (1,1);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (1,2);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (1,3);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (1,4);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (2,3);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (2,4);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (3,2);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (3,3);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (4,1);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (4,2);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (5,1);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (5,2);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (6,3);
+insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (1,1), (1,2), (1,3), (1,4), (2,3), (2,4), (3, 2), (3, 3), (4, 1), (4, 2), (5, 1), (5, 2), (6, 3);
 
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Prato A', 'Prato feito de letra A', 49.99, 1, 3), ('Prato B', 'Prato feito de letra B', 59.99, 1, 2), ('Prato C', 'Prato feito de letra C', 69.99, 1, 1);
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Porco com molho agridoce', 'Deliciosa carne suína ao molho especial', 78.90, 1, 1);
