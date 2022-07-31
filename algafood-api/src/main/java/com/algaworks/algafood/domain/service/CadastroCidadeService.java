@@ -14,28 +14,34 @@ import com.algaworks.algafood.domain.repository.EstadoRepository;
 @Service
 public class CadastroCidadeService {
 
+	private static final String CIDADE_NAO_ENCONTRADA = "A Cidade codigo %d nao foi localizada";
+
 	@Autowired
 	CidadeRepository cidadeRepository;
-	
+
 	@Autowired
 	EstadoRepository estadoRepository;
 	
+	@Autowired
+	CadastroEstadoService cadastroEstado;
+
 	public Cidade salvar(Cidade cidade) {
 		Long estadoId = cidade.getEstado().getId();
-		Optional<Estado> estado = estadoRepository.findById(estadoId);
-		if (estado.isEmpty()) {
-			throw new EntidadeNaoEncontradaException(String.format("O Estado codigo %d nao foi encontrado", estadoId));
-		}
-		cidade.setEstado(estado.get());
+		Estado estado = cadastroEstado.buscarOuFalhar(estadoId);
+		cidade.setEstado(estado);
 		return cidadeRepository.save(cidade);
 	}
 
 	public void excluir(Long cidadeId) {
 		Optional<Cidade> cidade = cidadeRepository.findById(cidadeId);
 		if (cidade.isEmpty()) {
-			throw new EntidadeNaoEncontradaException(String.format("A Cidade codigo %d nao foi localizada", cidadeId));
+			throw new EntidadeNaoEncontradaException(String.format(CIDADE_NAO_ENCONTRADA, cidadeId));
 		}
 		cidadeRepository.deleteById(cidadeId);
 	}
-	
+
+	public Cidade buscarOuFalhar(Long cidadeId) {
+		return cidadeRepository.findById(cidadeId)
+				.orElseThrow(() -> new EntidadeNaoEncontradaException(String.format(CIDADE_NAO_ENCONTRADA, cidadeId)));
+	}
 }
