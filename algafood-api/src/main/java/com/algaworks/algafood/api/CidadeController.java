@@ -45,9 +45,9 @@ public class CidadeController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cidade adicionar(@RequestBody Cidade cidade) {
 		try {
-		return cadastroCidade.salvar(cidade);
+			return cadastroCidade.salvar(cidade);
 		} catch (EntidadeNaoEncontradaException e) {
-			throw new NegocioException(e.getMessage());
+			throw new NegocioException(e.getMessage(), e);
 		}
 	}
 
@@ -58,7 +58,7 @@ public class CidadeController {
 		try {
 			return cadastroCidade.salvar(cidadeAtual);
 		} catch (EntidadeNaoEncontradaException e) {
-			throw new NegocioException(e.getMessage());
+			throw new NegocioException(e.getMessage(), e);
 		}
 	}
 
