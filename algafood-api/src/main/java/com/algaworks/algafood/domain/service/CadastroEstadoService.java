@@ -13,8 +13,6 @@ import com.algaworks.algafood.domain.repository.EstadoRepository;
 @Service
 public class CadastroEstadoService {
 
-	private static final String ESTADO_EM_USO = "O Estado codigo %d nao pode ser removido, pois esta em uso";
-
 	@Autowired
 	EstadoRepository estadoRepository;
 
@@ -26,7 +24,7 @@ public class CadastroEstadoService {
 		try {
 			estadoRepository.deleteById(estadoId);
 		} catch (DataIntegrityViolationException e) {
-			throw new EntidadeEmUsoException(String.format(ESTADO_EM_USO, estadoId));
+			throw new EntidadeEmUsoException(estadoId);
 		} catch (EmptyResultDataAccessException e) {
 			throw new EstadoNaoEncontradoException(estadoId);
 		}

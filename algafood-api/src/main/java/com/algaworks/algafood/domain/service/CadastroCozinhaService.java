@@ -13,7 +13,6 @@ import com.algaworks.algafood.domain.repository.CozinhaRepository;
 @Service
 public class CadastroCozinhaService {
 
-	private static final String COZINHA_NAO_ENCONTRADA = "A cozinha codigo %d nao foi encontrada";
 	@Autowired
 	CozinhaRepository cozinhaRepository;
 
@@ -25,7 +24,7 @@ public class CadastroCozinhaService {
 		try {
 			cozinhaRepository.deleteById(cozinhaId);
 		} catch (DataIntegrityViolationException e) {
-			throw new EntidadeEmUsoException(String.format(COZINHA_NAO_ENCONTRADA, cozinhaId));
+			throw new EntidadeEmUsoException(cozinhaId);
 		} catch (EmptyResultDataAccessException e) {
 			throw new CozinhaNaoEncontradaException(cozinhaId);
 		}

@@ -1,10 +1,6 @@
 package com.algaworks.algafood.domain.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(HttpStatus.CONFLICT)
-public class EntidadeEmUsoException extends RuntimeException {
+public class EntidadeEmUsoException extends NegocioException {
 
 	private static final long serialVersionUID = 6164727756406016422L;
 
@@ -12,6 +8,8 @@ public class EntidadeEmUsoException extends RuntimeException {
 		super(mensagem);
 	}
 	
-	
+	public EntidadeEmUsoException(Long id) {
+		this(String.format("A entidade codigo %d nao pode ser removida, pois esta em uso", id));
+	}
 
 }
