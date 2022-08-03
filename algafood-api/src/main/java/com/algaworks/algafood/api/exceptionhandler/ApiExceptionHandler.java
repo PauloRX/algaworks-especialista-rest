@@ -17,19 +17,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(EntidadeEmUsoException.class)
 	private ResponseEntity<?> handleEntidadeEmUsoException(EntidadeEmUsoException ex, WebRequest request) {
-		return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.CONFLICT, request);
+		Problem problem = createProblemBuilder(HttpStatus.CONFLICT, ProblemType.ENTIDADE_EM_USO, ex.getMessage()).build();
+		return handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.CONFLICT, request);
 	}
 	
 	@ExceptionHandler(EntidadeNaoEncontradaException.class)
 	private ResponseEntity<?> handleEntidadeNaoEncontradaException(EntidadeNaoEncontradaException ex, WebRequest request) {
-		Problem problem = createProblemBuilder(HttpStatus.NOT_FOUND,  ProblemType.ENTIDADE_NAO_ENCONTRADA, 
-				ex.getMessage()).build();
+		Problem problem = createProblemBuilder(HttpStatus.NOT_FOUND,  ProblemType.ENTIDADE_NAO_ENCONTRADA, ex.getMessage()).build();
 		return handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 	}
 	
 	@ExceptionHandler(NegocioException.class)
 	private ResponseEntity<?> handleNegocioException(NegocioException ex, WebRequest request) {
-		return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+		Problem problem = createProblemBuilder(HttpStatus.BAD_REQUEST, ProblemType.NEGOCIO, ex.getMessage()).build();
+		return handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 	
 	@Override
