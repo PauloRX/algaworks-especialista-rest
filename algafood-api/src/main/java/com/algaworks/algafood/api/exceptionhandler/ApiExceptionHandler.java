@@ -83,13 +83,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 			HttpStatus status, WebRequest request) {
 		String detail = StringUtils.EMPTY;
 		String path =  joinPath(ex.getPath());
-		if (ex instanceof UnrecognizedPropertyException) {
-			detail = String.format("A propriedade '%s' e invalida. Corrija e informe apenas as chaves do json especificadas no contrato", path );
-		} else if (ex instanceof IgnoredPropertyException) {
-			detail = String.format("Nao e permitido alterar a propriedade '%s'. Corrija o json e submeta novamente", path);
-		}
+
+		detail = String.format("A propriedade '%s' e invalida. Corrija e informe apenas as chaves do json especificadas no contrato", path );
 		
 		Problem problem = createProblemBuilder(status, ProblemType.PROPRIEDADE_INVALIDA, detail).build();
+		
 		return handleExceptionInternal(ex, problem , headers, status, request);
 	}
 
