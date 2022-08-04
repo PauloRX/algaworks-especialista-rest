@@ -1,5 +1,6 @@
 package com.algaworks.algafood.api.exceptionhandler;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.NegocioException;
+import com.fasterxml.jackson.databind.JsonMappingException.Reference;
 import com.fasterxml.jackson.databind.exc.IgnoredPropertyException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
@@ -80,7 +82,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	private ResponseEntity<Object> handlePropertyBindingException(PropertyBindingException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
 		String detail = StringUtils.EMPTY;
-		String path =  ex.getPath().stream().map(ref -> ref.getFieldName()).collect(Collectors.joining("."));
+		String path =  joinPath(ex.getPath());
 		if (ex instanceof UnrecognizedPropertyException) {
 			detail = String.format("A propriedade '%s' e invalida. Corrija e informe apenas as chaves do json especificadas no contrato", path );
 		} else if (ex instanceof IgnoredPropertyException) {
@@ -94,7 +96,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
 
-		String path = ex.getPath().stream().map(ref -> ref.getFieldName()).collect(Collectors.joining("."));
+		String path = joinPath(ex.getPath());
 		String detail = String.format(
 				"A propriedade '%s' recebeu valor '%s' que e um tipo invalido. Corrija e informe um valor compativel com o tipo %s",
 				path, ex.getValue(), ex.getTargetType().getSimpleName());
@@ -102,7 +104,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
-
+	
 	private Problem.ProblemBuilder createProblemBuilder(HttpStatus status, ProblemType problemType, String detail){
 		return Problem.builder()
 				.status(status.value())
@@ -110,4 +112,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 				.type(problemType.getUri())
 				.detail(detail); 
 	}
+
+	private String joinPath(List<Reference> references) {
+		return references.stream().map(ref -> ref.getFieldName()).collect(Collectors.joining("."));
+	}
+
 }
