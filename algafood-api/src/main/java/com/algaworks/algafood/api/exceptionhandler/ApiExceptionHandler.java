@@ -2,6 +2,7 @@ package com.algaworks.algafood.api.exceptionhandler;
 
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.NegocioException;
+import com.fasterxml.jackson.databind.exc.IgnoredPropertyException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.fasterxml.jackson.databind.exc.PropertyBindingException;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
@@ -64,6 +68,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		
 		if (rootCause instanceof InvalidFormatException) {
 			return handleInvalidFormatException((InvalidFormatException) rootCause, headers, status, request);
+		} else if (rootCause instanceof PropertyBindingException) {
+			return handlePropertyBindingException((PropertyBindingException) rootCause, headers, status, request);
 		}
 		
 		String detail = "O corpo da requisacao esta invalido. Verifique a sintaxe.";
@@ -71,6 +77,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
 	}
 	
+	private ResponseEntity<Object> handlePropertyBindingException(PropertyBindingException ex, HttpHeaders headers,
+			HttpStatus status, WebRequest request) {
+		String detail = StringUtils.EMPTY;
+		String path =  ex.getPath().stream().map(ref -> ref.getFieldName()).collect(Collectors.joining("."));
+		if (ex instanceof UnrecognizedPropertyException) {
+			detail = String.format("A propriedade '%s' e invalida. Corrija e informe apenas as chaves do json especificadas no contrato", path );
+		} else if (ex instanceof IgnoredPropertyException) {
+			detail = String.format("Nao e permitido alterar a propriedade '%s'. Corrija o json e submeta novamente", path);
+		}
+		
+		Problem problem = createProblemBuilder(status, ProblemType.PROPRIEDADE_INVALIDA, detail).build();
+		return handleExceptionInternal(ex, problem , headers, status, request);
+	}
+
 	private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
 
