@@ -27,6 +27,8 @@ import com.fasterxml.jackson.databind.exc.PropertyBindingException;
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
+	private static final String USR_FINAL_MESSAGE = "Ocorreu um erro interno inesperado no sistema. Tente novamente e se o problema persistir, entre em contato com o administrador do sistema";
+
 	@ExceptionHandler(EntidadeEmUsoException.class)
 	private ResponseEntity<?> handleEntidadeEmUso(EntidadeEmUsoException ex, WebRequest request) {
 		Problem problem = createProblemBuilder(HttpStatus.CONFLICT, ProblemType.ENTIDADE_EM_USO, ex.getMessage())
@@ -50,7 +52,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(Exception.class)
 	private ResponseEntity<Object> handleUncaughtException(Exception ex, WebRequest request) {
-		String detail = "Ocorreu um erro interno inesperado no sistema. Tente novamente e se o problema persistir, entre em contato com o administrador do sistema";
+		String detail = USR_FINAL_MESSAGE;
 		Problem problem = createProblemBuilder(HttpStatus.INTERNAL_SERVER_ERROR, ProblemType.ERRO_DE_SISTEMA, detail).build();
 		return handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
 	}
@@ -110,7 +112,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	    String detail = String.format("O parâmetro de URL '%s' recebeu o valor '%s', que é de um tipo inválido. Corrija e informe um valor compatível com o tipo %s.",
 	            ex.getName(), ex.getValue(), ex.getRequiredType().getSimpleName());
 	    
-	    Problem problem = createProblemBuilder(status, ProblemType.PARAMETRO_INVALIDO, detail).build();
+	    Problem problem = createProblemBuilder(status, ProblemType.PARAMETRO_INVALIDO, detail)
+	    		.userMessage(USR_FINAL_MESSAGE)
+	    		.build();
 
 		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
@@ -136,7 +140,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		String detail = String.format(
 				"A propriedade '%s' recebeu valor '%s' que e um tipo invalido. Corrija e informe um valor compativel com o tipo %s",
 				path, ex.getValue(), ex.getTargetType().getSimpleName());
-		Problem problem = createProblemBuilder(status, ProblemType.MENSAGEM_INCOMPREENSIVEL, detail).build();
+		Problem problem = createProblemBuilder(status, ProblemType.MENSAGEM_INCOMPREENSIVEL, detail)
+				.userMessage(USR_FINAL_MESSAGE)
+				.build();
 
 		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
