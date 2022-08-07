@@ -71,11 +71,13 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 		if (body == null) {
 			body = Problem.builder().status(status.value()).detail(status.getReasonPhrase())
-					.userMessage("")
+					.userMessage(USR_FINAL_MESSAGE)
+					.timestamp(LocalDateTime.now())
 					.build();
 		} else if (body instanceof String) {
 			body = Problem.builder().status(status.value()).detail((String) body)
 					.userMessage((String) body)
+					.timestamp(LocalDateTime.now())
 					.build();
 		}
 
