@@ -2,7 +2,10 @@ package com.algaworks.algafood;
 
 import static io.restassured.RestAssured.enableLoggingOfRequestAndResponseIfValidationFails;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -30,6 +33,21 @@ public class CadastroCozinhaIT {
 		.then()
 			.statusCode(HttpStatus.OK.value());
 	
+	}
+	
+	@Test
+	public void deveRetornarCozinhas_QuandoConsultarCozinhas() {
+		enableLoggingOfRequestAndResponseIfValidationFails();
+		
+		given()
+			.accept(ContentType.JSON)
+			.port(port)
+			.basePath("/cozinhas")
+		.when()
+			.get()
+		.then()
+			.body("", hasSize(5))
+			.body("nome", hasItems("Indiana", "Argentina"));
 	}
 		
 }
