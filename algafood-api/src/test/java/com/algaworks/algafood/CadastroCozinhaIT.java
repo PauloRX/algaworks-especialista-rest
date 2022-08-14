@@ -55,6 +55,7 @@ public class CadastroCozinhaIT {
 		databaseCleaner.clearTables();
 		preparaDados();
 		qtdCozinhas = repository.findAll().size();
+		
 	}
 
 	@Test

@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.algaworks.algafood.domain.exception.CidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.Cidade;
@@ -23,6 +24,7 @@ public class CadastroCidadeService {
 	@Autowired
 	CadastroEstadoService cadastroEstado;
 
+	@Transactional
 	public Cidade salvar(Cidade cidade) {
 		Long estadoId = cidade.getEstado().getId();
 		Estado estado = cadastroEstado.buscarOuFalhar(estadoId);
@@ -30,6 +32,7 @@ public class CadastroCidadeService {
 		return cidadeRepository.save(cidade);
 	}
 
+	@Transactional
 	public void excluir(Long cidadeId) {
 		Optional<Cidade> cidade = cidadeRepository.findById(cidadeId);
 		if (cidade.isEmpty()) {
