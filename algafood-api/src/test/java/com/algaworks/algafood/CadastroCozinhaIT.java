@@ -5,7 +5,6 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 
-import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
+
+import com.algaworks.algafood.domain.model.Cozinha;
+import com.algaworks.algafood.domain.service.CadastroCozinhaService;
+import com.algaworks.algafood.util.DatabaseCleaner;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -23,9 +26,12 @@ public class CadastroCozinhaIT {
 
 	@LocalServerPort
 	private int port;
+	
+	@Autowired
+	private CadastroCozinhaService cozinhaService;
 
 	@Autowired
-	private Flyway flyway;
+	private DatabaseCleaner databaseCleaner;
 	
 	@BeforeEach
 	public void setUp() {
@@ -33,7 +39,8 @@ public class CadastroCozinhaIT {
 		enableLoggingOfRequestAndResponseIfValidationFails();
 		RestAssured.port = port;
 		RestAssured.basePath = "/cozinhas";
-		flyway.migrate();
+		databaseCleaner.clearTables();
+		preparaDados();
 	}
 	
 	@Test
@@ -49,14 +56,14 @@ public class CadastroCozinhaIT {
 	}
 	
 	@Test
-	public void deveRetornarCozinhas_QuandoConsultarCozinhas() {
+	public void deveRetornar4Cozinhas_QuandoConsultarCozinhas() {
 		
 		given()
 			.accept(ContentType.JSON)
 		.when()
 			.get()
 		.then()
-			.body("", hasSize(5))
+			.body("", hasSize(4))
 			.body("nome", hasItems("Indiana", "Argentina"));
 	}
 	
@@ -71,6 +78,25 @@ public class CadastroCozinhaIT {
 			.post()
 		.then()
 			.statusCode(HttpStatus.CREATED.value());
+		
+	}
+	
+	private void preparaDados() {
+		Cozinha cozinha1 = new Cozinha();
+		cozinha1.setNome("Tailandesa");
+		cozinhaService.salvar(cozinha1);
+		
+		Cozinha cozinha2 = new Cozinha();
+		cozinha2.setNome("Indiana");
+		cozinhaService.salvar(cozinha2);
+		
+		Cozinha cozinha3 = new Cozinha();
+		cozinha3.setNome("Mexicana");
+		cozinhaService.salvar(cozinha3);
+		
+		Cozinha cozinha4 = new Cozinha();
+		cozinha4.setNome("Argentina");
+		cozinhaService.salvar(cozinha4);
 		
 	}
 		
