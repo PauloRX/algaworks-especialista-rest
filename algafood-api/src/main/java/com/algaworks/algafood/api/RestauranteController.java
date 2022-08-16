@@ -1,7 +1,6 @@
 package com.algaworks.algafood.api;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algafood.api.assembler.RestauranteDTOAssembler;
+import com.algaworks.algafood.api.assembler.RestauranteDTODesassembler;
 import com.algaworks.algafood.api.dto.RestauranteDTO;
 import com.algaworks.algafood.api.model.input.RestauranteInputDTO;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
@@ -39,9 +39,12 @@ public class RestauranteController {
 	@Autowired
 	private RestauranteDTOAssembler restauranteAssembler;
 	
+	@Autowired
+	private RestauranteDTODesassembler restauranteDesassembler;
+	
 	@GetMapping
 	public List<RestauranteDTO> listar() {
-		return toCollectionDTO(restauranteRepository.findAll());
+		return restauranteAssembler.toCollectionDTO(restauranteRepository.findAll());
 	}
 
 	@GetMapping("/{restauranteId}")
@@ -59,7 +62,7 @@ public class RestauranteController {
 	public RestauranteDTO adicionar(@RequestBody @Valid RestauranteInputDTO restauranteInput) {
 		try {
 			
-			Restaurante restaurante = restauranteAssembler.toDomainObject(restauranteInput);
+			Restaurante restaurante = restauranteDesassembler.toDomainObject(restauranteInput);
 			
 			return restauranteAssembler.toModel(cadastroRestaurante.salvar(restaurante));
 			
@@ -73,7 +76,7 @@ public class RestauranteController {
 	@PutMapping("/{restauranteId}")
 	public RestauranteDTO atualizar(@RequestBody @Valid RestauranteInputDTO restauranteInput, @PathVariable Long restauranteId) {
 		
-		Restaurante restaurante = restauranteAssembler.toDomainObject(restauranteInput);
+		Restaurante restaurante = restauranteDesassembler.toDomainObject(restauranteInput);
 		
 		Restaurante restauranteAtual = cadastroRestaurante.buscarOuFalhar(restauranteId);
 		
@@ -94,13 +97,5 @@ public class RestauranteController {
 		}
 	}
 
-	private List<RestauranteDTO> toCollectionDTO(List<Restaurante> restaurantes) {
-		
-		return restaurantes.stream()
-			.map(restaurante -> restauranteAssembler.toModel(restaurante))
-			.collect(Collectors.toList()
-		);
-		
-	}
 
 }

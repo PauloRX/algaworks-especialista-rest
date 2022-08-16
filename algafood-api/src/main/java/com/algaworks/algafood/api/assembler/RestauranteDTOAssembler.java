@@ -1,18 +1,17 @@
 package com.algaworks.algafood.api.assembler;
 
-import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
 import com.algaworks.algafood.api.dto.CozinhaDTO;
 import com.algaworks.algafood.api.dto.RestauranteDTO;
-import com.algaworks.algafood.api.model.input.RestauranteInputDTO;
-import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.model.Restaurante;
 
 @Component
 public class RestauranteDTOAssembler {
-	
+
 	public RestauranteDTO toModel(Restaurante restaurante) {
 
 		CozinhaDTO cozinhaDTO = new CozinhaDTO();
@@ -29,17 +28,11 @@ public class RestauranteDTOAssembler {
 
 	}
 
-	public Restaurante toDomainObject(@Valid RestauranteInputDTO restauranteInput) {
+	public List<RestauranteDTO> toCollectionDTO(List<Restaurante> restaurantes) {
 
-		Cozinha cozinha = new Cozinha();
-		cozinha.setId(restauranteInput.getCozinha().getId());
-
-		Restaurante restaurante = new Restaurante();
-		restaurante.setNome(restauranteInput.getNome());
-		restaurante.setTaxaFrete(restauranteInput.getTaxaFrete());
-		restaurante.setCozinha(cozinha);
-
-		return restaurante;
+		return restaurantes.stream().map(restaurante -> 
+				this.toModel(restaurante))
+				.collect(Collectors.toList());
 
 	}
 }
