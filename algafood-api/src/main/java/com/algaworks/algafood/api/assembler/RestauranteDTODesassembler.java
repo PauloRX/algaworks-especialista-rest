@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.algaworks.algafood.api.model.input.RestauranteInputDTO;
+import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.model.Restaurante;
 
 @Component
@@ -19,6 +20,11 @@ public class RestauranteDTODesassembler {
 
 		return mapper.map(restauranteInput, Restaurante.class);
 
+	}
+	
+	public void copyToDomainObject(RestauranteInputDTO input, Restaurante restaurante) {
+		restaurante.setCozinha(new Cozinha());
+		mapper.map(input, restaurante);
 	}
 	
 }
