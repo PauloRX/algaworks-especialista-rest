@@ -39,6 +39,7 @@ public class CadastroCidadeService {
 			throw new CidadeNaoEncontradaException(cidadeId);
 		}
 		cidadeRepository.deleteById(cidadeId);
+		cidadeRepository.flush();
 	}
 
 	public Cidade buscarOuFalhar(Long cidadeId) {
