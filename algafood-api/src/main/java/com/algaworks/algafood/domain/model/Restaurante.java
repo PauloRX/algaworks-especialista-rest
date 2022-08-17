@@ -51,6 +51,9 @@ public class Restaurante {
 	@Embedded
 	private Endereco endereco;
 	
+	@Column
+	private Boolean ativo = Boolean.TRUE;
+	
 	@CreationTimestamp
 	@Column(nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime dataCadastro;
@@ -66,5 +69,13 @@ public class Restaurante {
 	@JoinTable(name = "restaurante_forma_pagamento"
 		, joinColumns = @JoinColumn(name = "restaurante_id"), inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
 	private List<FormaPagamento> formasPagamento = new ArrayList<>();
+
+	public void ativar() {
+		setAtivo(true);
+	}
+
+	public void inativar() {
+		setAtivo(false);
+	}
 	
 }
