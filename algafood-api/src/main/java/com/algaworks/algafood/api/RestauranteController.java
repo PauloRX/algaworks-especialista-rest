@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.algaworks.algafood.api.assembler.RestauranteDTOAssembler;
 import com.algaworks.algafood.api.assembler.RestauranteDTODesassembler;
 import com.algaworks.algafood.api.dto.RestauranteDTO;
-import com.algaworks.algafood.api.model.input.RestauranteInputDTO;
+import com.algaworks.algafood.api.dto.input.RestauranteInputDTO;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.model.Restaurante;

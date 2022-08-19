@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.algaworks.algafood.api.assembler.CidadeDTOAssembler;
 import com.algaworks.algafood.api.assembler.CidadeDTODesassembler;
 import com.algaworks.algafood.api.dto.CidadeDTO;
-import com.algaworks.algafood.api.model.input.CidadeInputDTO;
+import com.algaworks.algafood.api.dto.input.CidadeInputDTO;
 import com.algaworks.algafood.domain.exception.CidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.NegocioException;

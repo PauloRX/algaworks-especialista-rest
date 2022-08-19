@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.algaworks.algafood.api.assembler.CozinhaDTOAssembler;
 import com.algaworks.algafood.api.assembler.CozinhaDTODesassembler;
 import com.algaworks.algafood.api.dto.CozinhaDTO;
-import com.algaworks.algafood.api.model.input.CozinhaInputDTO;
+import com.algaworks.algafood.api.dto.input.CozinhaInputDTO;
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.repository.CozinhaRepository;
 import com.algaworks.algafood.domain.service.CadastroCozinhaService;
