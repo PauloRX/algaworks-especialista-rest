@@ -1,11 +1,11 @@
-package com.algaworks.algafood.api.dto;
+package com.algaworks.algafood.api.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class FormaPagamentoDTO {
+public class FormaPagamentoModel {
 
 	private Long id;
 	

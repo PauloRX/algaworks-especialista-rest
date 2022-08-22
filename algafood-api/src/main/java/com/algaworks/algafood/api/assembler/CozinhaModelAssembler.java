@@ -7,22 +7,22 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.algaworks.algafood.api.dto.CozinhaDTO;
+import com.algaworks.algafood.api.model.CozinhaModel;
 import com.algaworks.algafood.domain.model.Cozinha;
 
 @Component
-public class CozinhaDTOAssembler {
+public class CozinhaModelAssembler {
 
 	@Autowired
 	private ModelMapper mapper;
 	
-	public CozinhaDTO toModel(Cozinha cozinha) {
+	public CozinhaModel toModel(Cozinha cozinha) {
 
-		return mapper.map(cozinha, CozinhaDTO.class);
+		return mapper.map(cozinha, CozinhaModel.class);
 
 	}
 	
-	public List<CozinhaDTO> toCollectionModel(List<Cozinha> cozinhas) {
+	public List<CozinhaModel> toCollectionModel(List<Cozinha> cozinhas) {
 		return cozinhas.stream()
 				.map(cozinha -> 
 					this.toModel(cozinha))

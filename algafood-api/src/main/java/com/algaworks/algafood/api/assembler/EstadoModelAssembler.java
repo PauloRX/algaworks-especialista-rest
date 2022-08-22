@@ -7,20 +7,20 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.algaworks.algafood.api.dto.EstadoDTO;
+import com.algaworks.algafood.api.model.EstadoModel;
 import com.algaworks.algafood.domain.model.Estado;
 
 @Component
-public class EstadoDTOAssembler {
+public class EstadoModelAssembler {
 
 	@Autowired
 	private ModelMapper mapper;
 	
-	public EstadoDTO toModel(Estado estado) {
-		return mapper.map(estado, EstadoDTO.class);
+	public EstadoModel toModel(Estado estado) {
+		return mapper.map(estado, EstadoModel.class);
 	}
 	
-	public List<EstadoDTO> toCollectionModel(List<Estado> estados) {
+	public List<EstadoModel> toCollectionModel(List<Estado> estados) {
 		return estados.stream()
 				.map(estado -> 
 					this.toModel(estado))

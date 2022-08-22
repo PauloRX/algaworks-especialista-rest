@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.algaworks.algafood.api.assembler.EstadoDTOAssembler;
-import com.algaworks.algafood.api.assembler.EstadoDTODesassembler;
-import com.algaworks.algafood.api.dto.EstadoDTO;
-import com.algaworks.algafood.api.dto.input.EstadoInputDTO;
+import com.algaworks.algafood.api.assembler.EstadoModelAssembler;
+import com.algaworks.algafood.api.assembler.EstadoInputDesassembler;
+import com.algaworks.algafood.api.model.EstadoModel;
+import com.algaworks.algafood.api.model.input.EstadoInput;
 import com.algaworks.algafood.domain.model.Estado;
 import com.algaworks.algafood.domain.repository.EstadoRepository;
 import com.algaworks.algafood.domain.service.CadastroEstadoService;
@@ -35,24 +35,24 @@ public class EstadoController {
 	private CadastroEstadoService cadastroEstado;
 
 	@Autowired
-	private EstadoDTOAssembler estadoAssembler;
+	private EstadoModelAssembler estadoAssembler;
 	
 	@Autowired
-	private EstadoDTODesassembler estadoDesassembler;
+	private EstadoInputDesassembler estadoDesassembler;
 	
 	@GetMapping
-	public List<EstadoDTO> listar() {
+	public List<EstadoModel> listar() {
 		return estadoAssembler.toCollectionModel(estadoRepository.findAll());
 	}
 
 	@GetMapping("/{estadoId}")
-	public EstadoDTO buscarPorId(@PathVariable Long estadoId) {
+	public EstadoModel buscarPorId(@PathVariable Long estadoId) {
 		return estadoAssembler.toModel(cadastroEstado.buscarOuFalhar(estadoId));
 	}
 
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public EstadoDTO adicionar(@RequestBody @Valid EstadoInputDTO estadoInput) {
+	public EstadoModel adicionar(@RequestBody @Valid EstadoInput estadoInput) {
 		
 		Estado estado = estadoDesassembler.toDomainObject(estadoInput);
 		
@@ -62,7 +62,7 @@ public class EstadoController {
 
 	@PutMapping("/{estadoId}")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public EstadoDTO atualizar(@PathVariable Long estadoId, @RequestBody @Valid EstadoInputDTO estadoInput) {
+	public EstadoModel atualizar(@PathVariable Long estadoId, @RequestBody @Valid EstadoInput estadoInput) {
 		
 		Estado estado = cadastroEstado.buscarOuFalhar(estadoId);
 		estadoDesassembler.copyToDomainObject(estadoInput, estado);

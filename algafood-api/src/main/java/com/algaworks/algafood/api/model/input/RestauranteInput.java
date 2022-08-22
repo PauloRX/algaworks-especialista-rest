@@ -1,4 +1,4 @@
-package com.algaworks.algafood.api.dto.input;
+package com.algaworks.algafood.api.model.input;
 
 import java.math.BigDecimal;
 
@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RestauranteInputDTO {
+public class RestauranteInput {
 
 	@NotBlank
 	private String nome;
@@ -24,6 +24,10 @@ public class RestauranteInputDTO {
 	
 	@Valid
 	@NotNull
-	private CozinhaIdInputDTO cozinha;
+	private CozinhaIdInput cozinha;
+	
+	@Valid
+	@NotNull
+	private EnderecoInput endereco;
 	
 }

@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.algaworks.algafood.api.dto.EnderecoDTO;
+import com.algaworks.algafood.api.model.EnderecoModel;
 import com.algaworks.algafood.domain.model.Endereco;
 
 @Configuration
@@ -14,7 +14,7 @@ public class ModelMapperConfig {
     public ModelMapper modelMapper() {
 
     	var mapper = new ModelMapper();
-    	var enderecoToEnderecoDTOTypeMap = mapper.createTypeMap(Endereco.class, EnderecoDTO.class);
+    	var enderecoToEnderecoDTOTypeMap = mapper.createTypeMap(Endereco.class, EnderecoModel.class);
     	
     	enderecoToEnderecoDTOTypeMap.<String>addMapping(
     			src -> src.getCidade().getEstado().getNome(), 

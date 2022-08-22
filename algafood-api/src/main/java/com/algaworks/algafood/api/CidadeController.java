@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.algaworks.algafood.api.assembler.CidadeDTOAssembler;
-import com.algaworks.algafood.api.assembler.CidadeDTODesassembler;
-import com.algaworks.algafood.api.dto.CidadeDTO;
-import com.algaworks.algafood.api.dto.input.CidadeInputDTO;
+import com.algaworks.algafood.api.assembler.CidadeModelAssembler;
+import com.algaworks.algafood.api.assembler.CidadeInputDesassembler;
+import com.algaworks.algafood.api.model.CidadeModel;
+import com.algaworks.algafood.api.model.input.CidadeInput;
 import com.algaworks.algafood.domain.exception.CidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.NegocioException;
@@ -38,24 +38,24 @@ public class CidadeController {
 	private CadastroCidadeService cadastroCidade;
 	
 	@Autowired
-	private CidadeDTOAssembler cidadeAssembler;
+	private CidadeModelAssembler cidadeAssembler;
 	
 	@Autowired
-	private CidadeDTODesassembler cidadeDesassembler;
+	private CidadeInputDesassembler cidadeDesassembler;
 	
 	@GetMapping
-	public List<CidadeDTO> listar() {
+	public List<CidadeModel> listar() {
 		return cidadeAssembler.toCollectionDTO(cidadeRepository.findAll());
 	}
 
 	@GetMapping(value =  "/{cidadeId}", consumes = {"application/json"}, produces = {"application/json"})
-	public CidadeDTO buscarPorId(@PathVariable Long cidadeId) {
+	public CidadeModel buscarPorId(@PathVariable Long cidadeId) {
 		return cidadeAssembler.toModel(cadastroCidade.buscarOuFalhar(cidadeId));
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public CidadeDTO adicionar(@RequestBody @Valid CidadeInputDTO cidadeInput) {
+	public CidadeModel adicionar(@RequestBody @Valid CidadeInput cidadeInput) {
 		try {
 			Cidade cidade = cidadeDesassembler.toDomainObject(cidadeInput);
 			return cidadeAssembler.toModel(cadastroCidade.salvar(cidade));
@@ -65,7 +65,7 @@ public class CidadeController {
 	}
 
 	@PutMapping("/{cidadeId}")
-	public CidadeDTO atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInputDTO cidadeInput) {
+	public CidadeModel atualizar(@PathVariable Long cidadeId, @RequestBody @Valid CidadeInput cidadeInput) {
 		Cidade cidadeAtual = cadastroCidade.buscarOuFalhar(cidadeId);
 		cidadeDesassembler.copyToDomainObject(cidadeInput, cidadeAtual);
 		

@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.algaworks.algafood.api.assembler.FormaPagamentoDTOAssembler;
-import com.algaworks.algafood.api.assembler.FormaPagamentoDTODesassembler;
-import com.algaworks.algafood.api.dto.FormaPagamentoDTO;
-import com.algaworks.algafood.api.dto.input.FormaPagamentoInputDTO;
+import com.algaworks.algafood.api.assembler.FormaPagamentoModelAssembler;
+import com.algaworks.algafood.api.assembler.FormaPagamentoInputDesassembler;
+import com.algaworks.algafood.api.model.FormaPagamentoModel;
+import com.algaworks.algafood.api.model.input.FormaPagamentoInput;
 import com.algaworks.algafood.domain.model.FormaPagamento;
 import com.algaworks.algafood.domain.repository.FormaPagamentoRepository;
 import com.algaworks.algafood.domain.service.CadastroFormaPagamentoService;
@@ -35,30 +35,30 @@ public class FormaPagamentoController {
 	private FormaPagamentoRepository repository;
 	
 	@Autowired
-	private FormaPagamentoDTOAssembler assembler;
+	private FormaPagamentoModelAssembler assembler;
 	
 	@Autowired
-	private FormaPagamentoDTODesassembler desassembler;
+	private FormaPagamentoInputDesassembler desassembler;
 	
 	@GetMapping
-	public List<FormaPagamentoDTO> listar() {
+	public List<FormaPagamentoModel> listar() {
 		return assembler.toCollectionModel(repository.findAll());
 	}
 	
 	@GetMapping("/{formaPagamentoId}")
-	public FormaPagamentoDTO buscarPorId(@PathVariable Long formaPagamentoId) {
+	public FormaPagamentoModel buscarPorId(@PathVariable Long formaPagamentoId) {
 		return assembler.toModel(cadastroFormaPagamento.buscarOuFalhar(formaPagamentoId));
 	}
 	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public FormaPagamentoDTO adicionar(@RequestBody @Valid FormaPagamentoInputDTO formaPagamentoInput) {
+	public FormaPagamentoModel adicionar(@RequestBody @Valid FormaPagamentoInput formaPagamentoInput) {
 		FormaPagamento formaPagamento = desassembler.toDomainObject(formaPagamentoInput);
 		return assembler.toModel(cadastroFormaPagamento.salvar(formaPagamento));
 	}
 	
 	@PutMapping("/{formaPagamentoId}")
-	public FormaPagamentoDTO atualizar(@PathVariable Long formaPagamentoId, @RequestBody FormaPagamentoInputDTO formaPagamentoInput) {
+	public FormaPagamentoModel atualizar(@PathVariable Long formaPagamentoId, @RequestBody FormaPagamentoInput formaPagamentoInput) {
 		FormaPagamento formaPagamento = cadastroFormaPagamento.buscarOuFalhar(formaPagamentoId);
 		desassembler.copyToDomainObject(formaPagamentoInput, formaPagamento);
 		return assembler.toModel(cadastroFormaPagamento.salvar(formaPagamento));
