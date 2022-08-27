@@ -44,12 +44,12 @@ insert into cidade (id, nome, estado_id) values (3, 'São Paulo', 2);
 insert into cidade (id, nome, estado_id) values (4, 'Campinas', 2);
 insert into cidade (id, nome, estado_id) values (5, 'Fortaleza', 3);
 
-insert into restaurante (nome, taxa_frete, cozinha_id, endereco_logradouro, endereco_numero, endereco_complemento, endereco_cep, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao, ativo) values ('Fasano', 7.5, 3, 'Av Sete de Setembro', '2030', '', '02036022', 'Santana', 3, utc_timestamp, utc_timestamp, true);
-insert into restaurante (nome, taxa_frete, cozinha_id, endereco_logradouro, endereco_numero, endereco_complemento, endereco_cep, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao, ativo) values ('Terraço Italia', 12.5, 3, 'Av Nove de Julho', '1922', '', '03409000', 'Bela Cintra', 3, utc_timestamp, utc_timestamp, true);
-insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo) values (3, 'Outback', 12, 3, utc_timestamp, utc_timestamp, true);
-insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo) values (4, 'Java Steakhouse', 12, 3, utc_timestamp, utc_timestamp, true);
-insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo) values (5, 'Lanchonete do Tio Sam', 11, 4, utc_timestamp, utc_timestamp, true);
-insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo) values (6, 'Bar da Maria', 6, 4, utc_timestamp, utc_timestamp, true);
+insert into restaurante (nome, taxa_frete, cozinha_id, endereco_logradouro, endereco_numero, endereco_complemento, endereco_cep, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao, ativo, aberto) values ('Fasano', 7.5, 3, 'Av Sete de Setembro', '2030', '', '02036022', 'Santana', 3, utc_timestamp, utc_timestamp, true, true);
+insert into restaurante (nome, taxa_frete, cozinha_id, endereco_logradouro, endereco_numero, endereco_complemento, endereco_cep, endereco_bairro, endereco_cidade_id, data_cadastro, data_atualizacao, ativo, aberto) values ('Terraço Italia', 12.5, 3, 'Av Nove de Julho', '1922', '', '03409000', 'Bela Cintra', 3, utc_timestamp, utc_timestamp, true, true);
+insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (3, 'Outback', 12, 3, utc_timestamp, utc_timestamp, true, true);
+insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (4, 'Java Steakhouse', 12, 3, utc_timestamp, utc_timestamp, true, true);
+insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (5, 'Lanchonete do Tio Sam', 11, 4, utc_timestamp, utc_timestamp, true, true);
+insert into restaurante (id, nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao, ativo, aberto) values (6, 'Bar da Maria', 6, 4, utc_timestamp, utc_timestamp, true, true);
 
 insert into permissao (id, nome, descricao) values (1, 'CONSULTAR_COZINHAS', 'Permite consultar cozinhas');
 insert into permissao (id, nome, descricao) values (2, 'EDITAR_COZINHAS', 'Permite editar cozinhas');
