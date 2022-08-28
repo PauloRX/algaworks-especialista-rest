@@ -89,4 +89,6 @@ insert into usuario (id, nome, email, senha, data_cadastro) values
 
 insert into grupo_permissao (grupo_id, permissao_id) values (1, 1), (1, 2), (2, 1),(3, 1),(4, 1),(5, 1);
 
+insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (1, 2), (2, 2);
+
 SET foreign_key_checks = 1;
