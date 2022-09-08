@@ -73,7 +73,7 @@ insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) va
 insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (5,2);
 insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id ) values (6,3);
 
-insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Prato A', 'Prato feito de letra A', 49.99, 1, 3), ('Prato B', 'Prato feito de letra B', 59.99, 1, 2), ('Prato C', 'Prato feito de letra C', 69.99, 1, 1);
+insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Prato A', 'Prato feito de letra A', 49.99, 1, 3), ('Prato B', 'Prato feito de letra B', 59.99, 1, 2), ('Prato C', 'Prato feito de letra C', 69.99, 0, 1);
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Porco com molho agridoce', 'Deliciosa carne suína ao molho especial', 78.90, 1, 1);
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Camarão tailandês', '16 camarões grandes ao molho picante', 110, 1, 1);
 insert into produto (nome, descricao, preco, ativo, restaurante_id) values ('Salada picante com carne grelhada', 'Salada de folhas com cortes finos de carne bovina grelhada e nosso molho especial de pimenta vermelha', 87.20, 1, 2);
