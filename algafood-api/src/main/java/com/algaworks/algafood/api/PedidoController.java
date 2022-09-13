@@ -3,6 +3,10 @@ package com.algaworks.algafood.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,9 +49,13 @@ public class PedidoController {
 	private PedidoResumoModelAssembler pedidoResumoAssembler;
 	
 	@GetMapping
-	public List<PedidoResumoModel> pesquisar(PedidoFilter filtro) {
-		return pedidoResumoAssembler.toCollectionModel(
-				pedidoRepository.findAll(PedidoSpecs.usandoFiltros(filtro)));
+	public Page<PedidoResumoModel> pesquisar(PedidoFilter filtro, @PageableDefault(size = 5) Pageable pageable) {
+		
+		Page<Pedido> pedidosPage = pedidoRepository.findAll(PedidoSpecs.usandoFiltros(filtro), pageable);
+		List<PedidoResumoModel> listaPedidosResumoModel = pedidoResumoAssembler.toCollectionModel(pedidosPage.getContent());
+		Page<PedidoResumoModel> pedidosResumoModelPage = new PageImpl<>(listaPedidosResumoModel, pageable, pedidosPage.getTotalElements());
+	
+		return pedidosResumoModelPage;
 	}
 
 	@GetMapping("/{codigoPedido}")
