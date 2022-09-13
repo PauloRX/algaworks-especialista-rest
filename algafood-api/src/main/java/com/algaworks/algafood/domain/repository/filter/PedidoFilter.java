@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class PedidoFilter {
 
-	private Long clientId;
+	private Long clienteId;
 
 	private Long restauranteId;
 	
