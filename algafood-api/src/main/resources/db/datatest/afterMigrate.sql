@@ -118,6 +118,10 @@ insert into pedido (id, codigo, restaurante_id, usuario_cliente_id, forma_pagame
 values (2, 'df84a653-a3b2-4b0a-aaee-f6833371db68', 4, 1, 2, 1, '38400-111', 'Rua Acre', '300', 'Casa 2', 'Centro',
 'CRIADO', utc_timestamp, 79, 0, 79);
 
+insert into pedido (id, codigo, restaurante_id, usuario_cliente_id, forma_pagamento_id, endereco_cidade_id, endereco_cep, endereco_logradouro, endereco_numero, 
+	endereco_complemento, endereco_bairro, status, data_criacao, subtotal, taxa_frete, valor_total)
+values (3, '299f3cdd-a9fb-4fb5-bd9c-b8c93c928201', 4, 1, 2, 1, '38400-111', 'Rua Acre', '300', 'Casa 2', 'Centro', 'ENTREGUE', '2022-09-19 01:46:08', 79, 0, 79);
+
 insert into item_pedido (id, pedido_id, produto_id, quantidade, preco_unitario, preco_total, observacao)
 values (3, 2, 6, 1, 79, 79, 'Ao ponto');
 
