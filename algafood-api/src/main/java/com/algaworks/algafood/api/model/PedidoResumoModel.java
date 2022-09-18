@@ -24,6 +24,8 @@ public class PedidoResumoModel {
     
     private RestauranteResumoModel restaurante;
     
-    private UsuarioModel cliente;
+    //private UsuarioModel cliente;
+    
+    private String nomeCliente;
     
 }

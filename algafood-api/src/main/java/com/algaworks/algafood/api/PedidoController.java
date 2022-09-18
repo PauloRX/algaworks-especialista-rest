@@ -22,12 +22,14 @@ import com.algaworks.algafood.api.assembler.PedidoResumoModelAssembler;
 import com.algaworks.algafood.api.model.PedidoModel;
 import com.algaworks.algafood.api.model.PedidoResumoModel;
 import com.algaworks.algafood.api.model.input.PedidoInput;
+import com.algaworks.algafood.core.data.PageableTranslator;
+import com.algaworks.algafood.domain.filter.PedidoFilter;
 import com.algaworks.algafood.domain.infrastructure.spec.PedidoSpecs;
 import com.algaworks.algafood.domain.model.Pedido;
 import com.algaworks.algafood.domain.model.Usuario;
 import com.algaworks.algafood.domain.repository.PedidoRepository;
-import com.algaworks.algafood.domain.repository.filter.PedidoFilter;
 import com.algaworks.algafood.domain.service.EmissaoPedidoService;
+import com.google.common.collect.ImmutableMap;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -51,6 +53,8 @@ public class PedidoController {
 	@GetMapping
 	public Page<PedidoResumoModel> pesquisar(PedidoFilter filtro, @PageableDefault(size = 5) Pageable pageable) {
 		
+		pageable = traduzirPageable(pageable);
+		
 		Page<Pedido> pedidosPage = pedidoRepository.findAll(PedidoSpecs.usandoFiltros(filtro), pageable);
 		List<PedidoResumoModel> listaPedidosResumoModel = pedidoResumoAssembler.toCollectionModel(pedidosPage.getContent());
 		Page<PedidoResumoModel> pedidosResumoModelPage = new PageImpl<>(listaPedidosResumoModel, pageable, pedidosPage.getTotalElements());
@@ -73,6 +77,17 @@ public class PedidoController {
 		pedido.getCliente().setId(1L);
 		
 		return pedidoAssembler.toModel(emissaoPedido.emissao(pedido));
+	}
+	
+	public Pageable traduzirPageable(Pageable apiPageable) {
+		var mapeamento = ImmutableMap.of(
+				"codigo", "codigo",
+				"nomeCliente", "cliente.nome",
+				"valorTotal", "valorTotal",
+				"restaurante.nome", "restaurante.nome"
+		); 
+		
+		return PageableTranslator.translate(apiPageable, mapeamento);
 	}
 	
 }
