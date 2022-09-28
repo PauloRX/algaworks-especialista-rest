@@ -2,6 +2,7 @@ package com.algaworks.algafood.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
@@ -21,7 +22,7 @@ public class FotoProduto {
 	@Column(name = "produto_id")
 	private Long id;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
 	private Produto produto;
 	
@@ -32,5 +33,12 @@ public class FotoProduto {
 	private String contentType;
 	
 	private Long tamanho;
+
+	public Long getRestauranteId() {
+		if (getProduto() != null) {
+			return getProduto().getRestaurante().getId();
+		}
+		return null;
+	}
 	
 }
