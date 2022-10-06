@@ -3,8 +3,6 @@ package com.algaworks.algafood;
 import static io.restassured.RestAssured.enableLoggingOfRequestAndResponseIfValidationFails;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.hasSize;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -70,17 +68,6 @@ public class CadastroCozinhaIT {
 	
 	}
 	
-	@Test
-	public void deveRetornarXCozinhas_QuandoConsultarCozinhas() {
-		
-		given()
-			.accept(ContentType.JSON)
-		.when()
-			.get()
-		.then()
-			.body("", hasSize(qtdCozinhas))
-			.body("nome", hasItems("Indiana", "Argentina"));
-	}
 	
 	@Test
 	public void deveRetornarStatus201_QuandoCriarCozinha() {

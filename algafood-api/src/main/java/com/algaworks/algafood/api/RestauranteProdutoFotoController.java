@@ -1,5 +1,7 @@
 package com.algaworks.algafood.api;
 
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,22 +34,22 @@ public class RestauranteProdutoFotoController {
 	private FotoProdutoModelAssembler produtoModelAssembler;
 	
 	@PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public FotoProdutoModel atualizarFoto(@PathVariable Long restauranteId, @PathVariable Long produtoId, @Valid FotoProdutoInput input) {
+	public FotoProdutoModel atualizarFoto(@PathVariable Long restauranteId, @PathVariable Long produtoId, @Valid FotoProdutoInput input) throws IOException {
 		
 		MultipartFile arquivo = input.getArquivo();
 		
-		FotoProduto foto = new FotoProduto();
-
 		Produto produto = cadastroProduto.buscarOuFalhar(restauranteId, produtoId);
 		
-		foto.setProduto(produto);
-		foto.setDescricao(input.getDescricao());
-		foto.setNomeArquivo(arquivo.getName());
-		foto.setContentType(arquivo.getContentType());
-		foto.setTamanho(arquivo.getSize());
-		foto.setNomeArquivo(arquivo.getOriginalFilename());
+		FotoProduto fotoProduto = FotoProduto.builder()
+				.produto(produto)
+				.descricao(input.getDescricao())
+				.nomeArquivo(arquivo.getName())
+				.contentType(arquivo.getContentType())
+				.tamanho(arquivo.getSize())
+				.nomeArquivo(arquivo.getOriginalFilename())
+				.build();
 
-		FotoProduto fotoSalva = catalogoFotoProduto.salvar(foto );
+		FotoProduto fotoSalva = catalogoFotoProduto.salvar(fotoProduto, arquivo.getInputStream());
 		
 		return produtoModelAssembler.toModel(fotoSalva);
 

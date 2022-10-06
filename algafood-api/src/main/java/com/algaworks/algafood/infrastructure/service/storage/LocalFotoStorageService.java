@@ -14,7 +14,7 @@ import com.algaworks.algafood.domain.service.FotoStorageService;
 public class LocalFotoStorageService implements FotoStorageService {
 
 	@Value("${algafood.storage.local.diretorio-fotos}")
-	private Path photoDirectory;
+	private Path diretorioFotos;
 	
 	@Override
 	public void armazenar(NovaFoto novafoto) {
@@ -29,8 +29,8 @@ public class LocalFotoStorageService implements FotoStorageService {
 		
 	}
 
-	private Path getArquivoPath(String filename) {
-		return photoDirectory.resolve(filename);
+	private Path getArquivoPath(String nomeArquivo) {
+		return diretorioFotos.resolve(Path.of(nomeArquivo));
 	}
 
 }

@@ -10,7 +10,6 @@ import com.algaworks.algafood.domain.model.Pedido;
 public class FluxoPedidoService {
 
 	
-	
 	@Autowired
 	private EmissaoPedidoService emissaoPedido;
 	
