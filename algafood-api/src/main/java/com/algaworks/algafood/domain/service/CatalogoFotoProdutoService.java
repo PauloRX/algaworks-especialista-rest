@@ -18,7 +18,7 @@ public class CatalogoFotoProdutoService {
 	private ProdutoRepository produtoRepository;
 	
 	@Autowired
-	private FotoStorageService fotoStorageService;
+	private FotoStorageService fotoStorage;
 	
 	
 	@Transactional
@@ -28,12 +28,15 @@ public class CatalogoFotoProdutoService {
 		
 		Long produtoId = fotoProduto.getProduto().getId();
 		
+		String nomeArquivo = fotoStorage.gerarNomeArquivo(fotoProduto.getNomeArquivo());
+		
 		Optional<FotoProduto> fotoExistente = produtoRepository.findFotoById(restauranteId, produtoId);
 		
 		if (fotoExistente.isPresent()) {
 			produtoRepository.delete(fotoExistente.get());
 		}
 		
+		fotoProduto.setNomeArquivo(nomeArquivo);
 		fotoProduto = produtoRepository.save(fotoProduto);
 		produtoRepository.flush();
 		
@@ -42,7 +45,7 @@ public class CatalogoFotoProdutoService {
 				.inputStream(dados)
 				.build();
 		
-		fotoStorageService.armazenar(novaFoto);
+		fotoStorage.armazenar(novaFoto);
 		 
 		 return fotoProduto;
 	}

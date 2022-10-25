@@ -21,7 +21,7 @@ import com.algaworks.algafood.domain.service.CadastroProdutoService;
 import com.algaworks.algafood.domain.service.CatalogoFotoProdutoService;
 
 @RestController
-@RequestMapping("/restaurantes/{restauranteId}/produtos/{produtoId}")
+@RequestMapping("/restaurantes/{restauranteId}/produtos/{produtoId}/foto")
 public class RestauranteProdutoFotoController {
 	
 	@Autowired

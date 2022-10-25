@@ -16,6 +16,7 @@ public class LocalFotoStorageService implements FotoStorageService {
 	@Value("${algafood.storage.local.diretorio-fotos}")
 	private Path diretorioFotos;
 	
+	
 	@Override
 	public void armazenar(NovaFoto novafoto) {
 		
